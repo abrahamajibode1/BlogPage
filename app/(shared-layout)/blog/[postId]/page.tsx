@@ -12,7 +12,6 @@ import { PostPresence } from "@/components/web/PostPresence";
 import { getToken } from "@/lib/auth-server";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
-import { connection } from "next/server";
 
 interface PostIdRouteProps {
   params: {

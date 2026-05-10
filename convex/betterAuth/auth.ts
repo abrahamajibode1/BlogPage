@@ -19,14 +19,19 @@ export const authComponent = createClient<DataModel,  typeof schema>(
 
 // Better Auth Options
 export const createAuthOptions = (ctx: GenericCtx<DataModel>) => {
+  const siteUrl = process.env.BETTER_AUTH_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   return {
-    appName: "My App",
-    baseURL: process.env.SITE_URL,
+     appName: "My App",
+    baseURL: siteUrl,
     secret: process.env.BETTER_AUTH_SECRET,
     database: authComponent.adapter(ctx),
     emailAndPassword: {
       enabled: true,
     },
+    trustedOrigins: [
+      siteUrl,
+      ...(process.env.BETTER_AUTH_TRUSTED_ORIGINS?.split(",").map(o => o.trim()).filter(Boolean) ?? []),
+    ],
     plugins: [convex({ authConfig })],
   } satisfies BetterAuthOptions;
 };

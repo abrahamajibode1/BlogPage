@@ -23,6 +23,7 @@ import { z } from "zod";
 import { useTransition } from "react";
 import { Loader2 } from "lucide-react";
 import { createBlogAction } from "@/app/actions";
+import { toast } from "sonner";
 
 export default function CreateRoute() {
   const [isPending, startTransition] = useTransition();
@@ -37,9 +38,10 @@ export default function CreateRoute() {
 
   function onSubmit(values: z.infer<typeof postSchema>) {
     startTransition(async () => {
-      console.log("hey this run on client side");
-
-      await createBlogAction(values);
+      const result = await createBlogAction(values);
+       if (result?.error) {
+         toast.error(result.error);
+       }
     });
   }
   return (

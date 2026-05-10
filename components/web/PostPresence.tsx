@@ -13,7 +13,13 @@ interface iAppProps {
 export function PostPresence({ roomId, userId }: iAppProps) {
   const presenceState = usePresence(api.presence, roomId, userId);
 
-  if (!presenceState || presenceState.length === 0) {
+  if (!presenceState) {
+    return null;
+  }
+
+  const onlineUsers = presenceState.filter((p) => p.online);
+
+  if (onlineUsers.length === 0) {
     return null;
   }
 

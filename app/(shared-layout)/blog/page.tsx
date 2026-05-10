@@ -30,9 +30,9 @@ export default function BlogPage() {
         </p>
       </div>
 
-      {/*<Suspense fallback={<SkeletonLoading />}>*/}
+      <Suspense fallback={<SkeletonLoading />}>
         <LoadBlogList />
-      {/*</Suspense>*/}
+      </Suspense>
     </div>
   );
 }
@@ -41,6 +41,7 @@ async function LoadBlogList() {
   "use cache";
   cacheLife("hours");
   cacheTag("blog")
+  
   const data = await fetchQuery(api.posts.getPosts);
 
   return (

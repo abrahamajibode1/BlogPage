@@ -9,7 +9,6 @@
 /* ---------------- THEME VARIABLES ---------------- */
 
 :root {
-
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
 
@@ -111,7 +110,6 @@
 }
 
 @theme inline {
-
   --font-heading: var(--font-sans);
 
   --font-sans: var(--font-sans);
@@ -203,5 +201,14 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@keyframes move {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(10px);
   }
 }

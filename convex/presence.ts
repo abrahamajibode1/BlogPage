@@ -18,7 +18,7 @@ export const heartbeat = mutation({
     // TODO: Add your auth checks here.
     const user = await authComponent.safeGetAuthUser(ctx);
 
-    if(!user || user._id !== userId) {
+    if(!user || user._id.toString() !== userId) {
       throw new ConvexError("Unauthorized");
     }
 
