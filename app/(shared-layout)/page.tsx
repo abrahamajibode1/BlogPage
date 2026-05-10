@@ -5,7 +5,7 @@ export default function Home() {
     <div className="flex items-center gap-[100px]">
       <div className="flex flex-1 flex-col gap-[40px]">
         <h1 className="text-[72px] md:text-[52px] font-bold bg-gradient-to-b from-[#194c33] to-[#bbb] bg-clip-text text-transparent">
-          Welcome to My Next.js App!
+          Welcome to My Blog App!
         </h1>
         <p className="font-light text-[24px] text-muted-foreground">
           Turning ideas into Reality. Ability to work together with teams from
