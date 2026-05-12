@@ -7,8 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Metadata } from "next";
-//import { cacheLife, cacheTag } from "next/cache";
-import { connection } from "next/server";
+import { cacheLife, cacheTag } from "next/cache";
 
 // export const dynamic = "force-static";
 // 'auto' | 'force-dynamic' | 'error' | 'force-static'
@@ -39,10 +38,9 @@ export default function BlogPage() {
 }
 
 async function LoadBlogList() {
-  // "use cache";
-  // cacheLife("hours");
-  // cacheTag("blog")
-  await connection();
+  "use cache";
+  cacheLife("hours");
+  cacheTag("blog")
   const data = await fetchQuery(api.posts.getPosts);
 
   return (
