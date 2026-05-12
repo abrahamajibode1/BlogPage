@@ -50,7 +50,12 @@ export default function SignUpPage() {
           router.push("/auth/login");
           },
           onError: (error) => {
-            toast.error(error.error.message);
+             console.log("SIGNUP ERROR FULL:", JSON.stringify(error, null, 2));
+            const message =
+              error?.error?.message ??
+              error?.error?.statusText ??
+              "Sign up failed. Please try again.";
+            toast.error(message);
           }
         }      
       });

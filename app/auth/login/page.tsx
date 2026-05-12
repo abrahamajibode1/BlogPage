@@ -48,7 +48,12 @@ export default function LoginPage() {
             router.push("/");
           },
           onError: (error) => {
-            toast.error(error.error.message);
+            console.log("LOGIN ERROR FULL:", JSON.stringify(error, null, 2));
+            const message =
+              error?.error?.message ??
+              error?.error?.statusText ??
+              "Login failed. Please check your credentials.";
+            toast.error(message);
           }
         }
       });
