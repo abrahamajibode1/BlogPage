@@ -39,25 +39,25 @@ export default function SignUpPage() {
   });
 
   function onSubmit(data: z.infer<typeof signUpSchema>) {
-    startTransition( async () => {
+    startTransition(async () => {
       await authClient.signUp.email({
         email: data.email,
         name: data.name,
         password: data.password,
         fetchOptions: {
           onSuccess: () => {
-          toast.success("Account created successfully");
-          router.push("/auth/login");
+            toast.success("Account created successfully");
+            router.push("/");
           },
           onError: (error) => {
-             console.log("SIGNUP ERROR FULL:", JSON.stringify(error, null, 2));
+            console.log("SIGNUP ERROR FULL:", JSON.stringify(error, null, 2));
             const message =
               error?.error?.message ??
               error?.error?.statusText ??
               "Sign up failed. Please try again.";
             toast.error(message);
-          }
-        }      
+          },
+        },
       });
     });
   }
