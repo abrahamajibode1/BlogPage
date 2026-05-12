@@ -18,9 +18,7 @@ export const authComponent = createClient<DataModel, typeof schema>(
 );
 
 // Better Auth Options — called at request time, not module load time
-export const createAuthOptions = (
-  ctx: GenericCtx<DataModel>,
-): BetterAuthOptions => {
+export const createAuthOptions = (ctx: GenericCtx<DataModel>): BetterAuthOptions => {
   const siteUrl =
     process.env.BETTER_AUTH_URL ??
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -31,6 +29,15 @@ export const createAuthOptions = (
     process.env.AUTH_SECRET ??
     "default-secret-replace-me";
 
+  const trustedOrigins = [
+    "http://localhost:3000",
+    "https://blog-page-two-henna.vercel.app",
+    ...(process.env.BETTER_AUTH_TRUSTED_ORIGINS
+      ?.split(",")
+      .map((o) => o.trim())
+      .filter(Boolean) ?? []),
+  ];
+
   return {
     appName: "My App",
     baseURL: siteUrl,
@@ -39,12 +46,7 @@ export const createAuthOptions = (
     emailAndPassword: {
       enabled: true,
     },
-    trustedOrigins: [
-      siteUrl,
-      ...(process.env.BETTER_AUTH_TRUSTED_ORIGINS?.split(",")
-        .map((o) => o.trim())
-        .filter(Boolean) ?? []),
-    ],
+    trustedOrigins,
     plugins: [convex({ authConfig })],
   };
 };
