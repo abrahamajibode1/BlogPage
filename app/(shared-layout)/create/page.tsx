@@ -24,9 +24,12 @@ import { useTransition } from "react";
 import { Loader2 } from "lucide-react";
 import { createBlogAction } from "@/app/actions";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function CreateRoute() {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
   const form = useForm({
     resolver: zodResolver(postSchema),
     defaultValues: {
@@ -39,9 +42,18 @@ export default function CreateRoute() {
   function onSubmit(values: z.infer<typeof postSchema>) {
     startTransition(async () => {
       const result = await createBlogAction(values);
-       if (result?.error) {
-         toast.error(result.error);
-       }
+      fetchOptions: {
+        if (result?.success) {
+          onSuccess: () => {
+            toast.success("Post created successfully");
+            router.push("/blog");
+          };
+        } else {
+          onError: () => {
+            toast.error(result.error);
+          };
+        }
+      }
     });
   }
   return (
