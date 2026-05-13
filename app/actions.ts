@@ -54,6 +54,6 @@ export async function createBlogAction(values: z.infer<typeof postSchema>) {
     };
   }
 
-  revalidateTag("blog");
-  return {success: true};
+  revalidateTag("blog", "fetch");
+  return { success: true };
 }
