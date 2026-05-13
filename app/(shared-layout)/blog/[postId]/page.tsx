@@ -30,8 +30,6 @@ export async function generateMetadata({
     };
   }
 
-  //const { postId } = params;
-
   const post = await fetchQuery(api.posts.getPostById, {
     postId,
   });
@@ -54,8 +52,6 @@ export default async function PostIdRoute({ params }: PostIdRouteProps) {
   if (!postId) {
     return <div>Invalid post</div>;
   }
-
-  //const { postId } = params;
 
   const token = await getToken();
 
