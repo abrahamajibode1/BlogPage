@@ -14,9 +14,16 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
       {
-        hostname: "industrious-hawk-866.convex.cloud",
+        hostname: ".convex.cloud",
         protocol: "https",
         port: "",
+        pathname: "/**",
+      },
+      {
+        hostname: ".convex.site",
+        protocol: "https",
+        port: "",
+        pathname: "/**",
       },
     ],
   },

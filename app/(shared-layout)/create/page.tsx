@@ -42,18 +42,12 @@ export default function CreateRoute() {
   function onSubmit(values: z.infer<typeof postSchema>) {
     startTransition(async () => {
       const result = await createBlogAction(values);
-      fetchOptions: {
-        if (result?.success) {
-          onSuccess: () => {
-            toast.success("Post created successfully");
-            router.push("/blog");
-          };
-        } else {
-          onError: () => {
-            toast.error(result.error);
-          };
+        if (result?.error) {
+          toast.error(result.error);
+        } else if(result?.success) {
+          toast.success("Post created successfully");
+          router.push("/blog")
         }
-      }
     });
   }
   return (
